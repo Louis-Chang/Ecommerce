@@ -11,12 +11,24 @@ function HomePage() {
     const dispatch = useDispatch();
     const categories = useSelector(getAllCategories);
     const products = useSelector(getAllProducts);
-    console.log(products);
     const productStatus = useSelector(getAllProductsStatus);
 
     useEffect(() => {
         dispatch(fetchAsyncProducts(50));
-      }, []);
+    }, []);
+
+    // randomizing the products in the list
+    const tempProducts = [];
+    if(products.length > 0){
+        for(let i in products) {
+            let randomIndex = Math.floor(Math.random() * products.length);
+
+            while(tempProducts.includes(products[randomIndex])){
+                randomIndex = Math.floor(Math.random() * products.length);
+            }
+            tempProducts[i] = products[randomIndex];
+        }
+    }
 
     return (
       <main>
@@ -32,7 +44,7 @@ function HomePage() {
                 {productStatus === STATUS.LOADING ? (
                   <Loader />
                 ) : (
-                  <ProductList products={products}/>
+                  <ProductList products={tempProducts}/>
                 )}
               </div>
             </div>

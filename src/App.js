@@ -4,7 +4,7 @@ import Footer from './components/Footer/Footer';
 import Store from './store/store';
 import { Provider } from 'react-redux';
 import Sidebar from './components/Sidebar/Sidebar';
-import {Home, CategoryProduct, ProductSingle, Cart, Search} from "./pages/index";
+import {Home, CategoryProduct, ProductSingle, Cart} from "./pages/index";
 
 function App() {
   return (
@@ -15,8 +15,9 @@ function App() {
           <Sidebar />
           <Routes>
             <Route path = "/" element = {<Home />} />
-            <Route path="/products" element={<h1>Products</h1>} />
-            <Route path="/contact" element={<h1>Contact</h1>} />
+            <Route path = "/product/:id" element = {<ProductSingle />} />
+            <Route path = "/category/:category" element = {<CategoryProduct />} />
+            <Route path = "/cart" element = {<Cart />} />
           </Routes>
           <Footer />
         </BrowserRouter>

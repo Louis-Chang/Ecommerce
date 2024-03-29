@@ -1,6 +1,6 @@
-import Home from './HomePage/HomePage';
-import Cart from './CartPages/CartPage';
+import Home from './HomePage/HomePage'
+import Cart from './CartPages/CartPage'
+import ProductSingle from './ProductSingle/ProductSinglePage'
+import CategoryProduct from './CategoryProduct/CategoryProductPage'
 
-import ProductSingle from './ProductSinglePage';
-
-export { Home, Cart, ProductSingle};
+export { Home, Cart, ProductSingle, CategoryProduct};
