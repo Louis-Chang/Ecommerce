@@ -70,17 +70,18 @@
 .product-item-info .price .old-price {
     opacity: 0.7;
     text-decoration: line-through;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .product-item-info .price .new-price {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
     font-weight: 700;
     font-size: 16px;
+    color: red;
 }
 
 .product-item-info .price .discount {
-    font-size: 13px;
+    font-size: 10px;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
 }

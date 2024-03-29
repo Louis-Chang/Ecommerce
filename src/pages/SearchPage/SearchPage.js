@@ -13,8 +13,6 @@ const SearchPage = () => {
   const searchProducts = useSelector(getSearchProducts);
   const searchProductsStatus = useSelector(getSearchProductsStatus);
 
-  console.log(searchTerm);
-  console.log(searchProducts);
   
   useEffect(() => {
     dispatch(clearSearch());
