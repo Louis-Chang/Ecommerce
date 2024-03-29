@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const fetchFromLocalStorage = () => {
     let cart = localStorage.getItem('cart');
-    if(cart){
+    if(cart) {
         return JSON.parse(localStorage.getItem('cart'));
     } else {
         return [];
@@ -20,14 +20,14 @@ const initialState = {
     isCartMessageOn: false
 }
 
-const cartSlice = createSlice({
+const cartSlice = createSlice( {
     name: 'cart',
     initialState,
     reducers: {
         addToCart: (state, action) => {
             const isItemInCart = state.carts.find(item => item.id === action.payload.id);
 
-            if(isItemInCart){
+            if(isItemInCart) {
                 const tempCart = state.carts.map(item => {
                     if(item.id === action.payload.id){
                         let tempQty = item.quantity + action.payload.quantity;

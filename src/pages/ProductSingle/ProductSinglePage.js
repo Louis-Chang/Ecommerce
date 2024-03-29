@@ -7,7 +7,8 @@ import Loader from '../../components/Loader/Loader'
 import { formatPrice } from '../../utils/helpers'
 import { addToCart, getCartMessageStatus, setCartMessageOff, setCartMessageOn } from '../../store/cartSlice';
 import { Button } from 'react-bootstrap';
-import "./ProductSinglePage.css"
+import "./ProductSinglePage.css";
+import CartMessage from '../../components/CartMessage/CartMessage';
 
 function ProductSinglePage() {
     const {id} = useParams();
@@ -39,12 +40,19 @@ function ProductSinglePage() {
       return <Loader />
     }
   
-    const handleQuantityChange = (type) => {
+    const increaseQty = () => {
+        setQuantity((prevQty) => {
+          let tempQty = prevQty + 1;
+          if(tempQty > product?.stock) tempQty = product?.stock;
+          return tempQty;
+        })
+    }
+    
+    const decreaseQty = () => {
       setQuantity((prevQty) => {
-        let newQty = type === "increase" ? prevQty + 1 : prevQty - 1;
-        newQty = Math.max(newQty, 1); // 数量不应该少于1
-        newQty = product?.stock ? Math.min(newQty, product?.stock) : newQty; // 数量也不应该多于库存量
-        return newQty;
+        let tempQty = prevQty - 1;
+        if (tempQty < 1) tempQty = 1;
+        return tempQty;
       });
     };
   
@@ -110,24 +118,26 @@ function ProductSinglePage() {
                   />
                   <Button
                     type="button" className="btn btn-light"
-                    onClick={() => handleQuantityChange("decrease")}
+                    onClick={() => decreaseQty()}
                   >
                     -
                   </Button>
                   <Button
                     type="button" className="btn btn-light"
-                    onClick={() => handleQuantityChange("increase")}
+                    onClick={() => increaseQty()}
                   >
                     +
                   </Button>
                 </div>
-                <button type="button" className="btn btn-primary">
-                  Add to Cart
+                <button type = "button" className='btn btn-primary'>
+                    <i className='fas fa-shopping-cart'></i>
+                    <span className='btn-text mx-2' onClick={() => { addToCartHandler(product)}}>Add to cart</span>
                 </button>
               </div>
             </div>
           </div>
         </div>
+        {cartMessageStatus && <CartMessage />}
       </main>
     );
 }
