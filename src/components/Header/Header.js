@@ -4,10 +4,12 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { setSidebarOn } from '../../store/sidebarSlice';
 import { getAllCarts, getCartItemsCount, getCartTotal } from '../../store/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const itemsCount = useSelector(getCartItemsCount);
   const carts = useSelector(getAllCarts);
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +17,11 @@ const Header = () => {
   const handleSearchTerm = (e) => {
     e.preventDefault();
     setSearchTerm(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search/${searchTerm}`);
   };
 
   useEffect(() => {
@@ -39,7 +46,7 @@ const Header = () => {
             </LinkContainer>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-1 flex-lg-row">
-              <Form className="d-flex flex-grow-1">
+              <Form className="d-flex flex-grow-1" onSubmit={handleSearchSubmit}>
                 <FormControl
                   type="search"
                   placeholder="Search"
